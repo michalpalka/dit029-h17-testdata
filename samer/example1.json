@@ -1,0 +1,141 @@
+[
+    {
+        "meta": {
+            "format": "DIT029 format",
+            "version": "1.0",
+            "extensions": []
+	    },
+	    "type": "sequence_diagram ",
+	    "processes": [{
+			"class": "Gateway",
+			"name": "g"
+		},
+		{
+			"class": "User",
+			"name": "u1"
+		},
+		{
+			"class": "User",
+			"name": "u2"
+		},
+		{
+			"class": "User",
+			"name": "u3"
+		}
+	    ],
+	    "diagram": {
+		    "node": "par",
+		    "content": [{
+				"node": "seq",
+				"content": [{
+						"node": "send",
+						"from": "u1",
+						"to": "g",
+						"message": ["fwd", "u2", "msg1"]
+					},
+					{
+						"node": "send",
+						"from": "u3",
+						"to": "g",
+						"message": ["fwd", "u1", "msg2"]
+					},
+					{
+						"node": "send",
+						"from": "g",
+						"to": "u2",
+						"message": ["fwd",
+							"u2", "msg1"
+						]
+					},
+					{
+						"node": "send",
+						"from": "g",
+						"to": "u1",
+						"message": ["fwd", "u1", "msg2"]
+					}
+				]
+			},
+			{
+				"node": "seq",
+				"content": [{
+						"node": "send ",
+						"from": "u3",
+						"to": "g",
+						"message": ["status"]
+					},
+					{
+						"node ": "send ",
+						"from": "g",
+						"to": "u3",
+						"message": ["ok"]
+					}
+				]
+			}
+		    ]
+        }
+    },{
+        "meta ": {
+            "format": "DIT029 format",
+            "version": "1.0",
+            "extensions": []
+        },
+        "type": "class_diagram",
+        "classes": [{
+                "name": "Device",
+                "fields": [{
+                    "name": "network_interface",
+                    "type": "string"
+                }]
+            },
+            {
+                "name": "Gateway",
+                "fields": []
+            },
+            {
+                "name": "User",
+                "fields": [{
+                    "name": "name",
+                    "type": "string"
+                }, {
+                    "name": "email",
+                    "type": "string"
+                }]
+            }
+        ],
+        "relationships": [{
+                "type": "inheritance",
+                "superclass": "Device",
+                "subclass": "Gateway"
+            },
+            {
+                "type": "inheritance",
+                "superclass": "Device",
+                "subclass": "User"
+            }
+        ]
+    },{
+        "meta": {
+            "format": "DIT029 format",
+            "version": "1.0",
+            "extensions": []
+        },
+        "type": "deployment_diagram",
+        "mapping": [{
+                "process": "g",
+                "device": "server"
+            }, 
+            {
+                "process": "u1",
+                "device": "smartphone1"
+            },
+            {
+                "process": "u2",
+                "device": "desktop_computer1"
+            },
+            {
+                "process": "u3",
+                "device": "desktop_computer1"
+            }
+        ]
+    }
+]
